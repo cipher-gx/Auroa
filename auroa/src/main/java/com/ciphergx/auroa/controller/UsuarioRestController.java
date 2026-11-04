@@ -11,17 +11,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ciphergx.auroa.dto.UsuarioResponseDto;
 import com.ciphergx.auroa.model.Usuario;
 import com.ciphergx.auroa.repository.UsuarioRepository;
+import com.ciphergx.auroa.service.UsuarioService;
 
-@RestController 
-@RequestMapping ("/api/usuarios")
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequestMapping("/api/usuarios")
+@RequiredArgsConstructor
 public class UsuarioRestController {
-    
-    UsuarioRepository usuarioRepository;
 
-    @GetMapping ("/buscar")
-    public ResponseEntity<UsuarioResponseDto> buscarPorCorreo(@RequestParam String email){
+    private final UsuarioRepository usuarioRepository;
+    private final UsuarioService usuarioService;
+
+    @GetMapping("/buscar")
+    public ResponseEntity<UsuarioResponseDto> buscarPorCorreo(@RequestParam String email) {
         Optional<Usuario> caja = usuarioRepository.findByEmail(email);
-        if(caja.isPresent()){
+        if (caja.isPresent()) {
             Usuario u = caja.get();
             UsuarioResponseDto udto = new UsuarioResponseDto(u.getNombre(), u.getEmail(), u.getFechaRegistro(), u.getId());
             return ResponseEntity.ok(udto);

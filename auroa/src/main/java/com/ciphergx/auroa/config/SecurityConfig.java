@@ -24,9 +24,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Dejamos libres las rutas de login y registro de usuarios
-                .requestMatchers("/api/auth/**", "/api/usuarios/**").permitAll()
-                // Cualquier otra ruta (cuentas, movimientos, etc.) pedirá el token JWT
+                .requestMatchers("/api/auth/**", "/api/usuarios/**", "/error").permitAll()
                 .anyRequest().authenticated()
             )
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
