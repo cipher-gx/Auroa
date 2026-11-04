@@ -1,10 +1,13 @@
 package com.ciphergx.auroa.service;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ciphergx.auroa.dto.ActualizarPasswordRequestDto;
+import com.ciphergx.auroa.dto.AuthResponseDto;
 import com.ciphergx.auroa.dto.RegistroRequestDto;
 import com.ciphergx.auroa.dto.UsuarioRequestDto;
 import com.ciphergx.auroa.dto.UsuarioResponseDto;
@@ -32,5 +35,16 @@ public class UsuarioService {
         usuario.setPasswordHash(hash);
         usuarioRepository.save(usuario);
         return new UsuarioResponseDto(usuario.getNombre(), usuario.getEmail(), usuario.getFechaRegistro(), usuario.getId());
+    }
+
+    public void actualizarPassword(Usuario usuario, ActualizarPasswordRequestDto dto){
+
+        if (!passwordEncoder.matches(dto.getOldPassword(), usuario.getPasswordHash())){
+            throw new RuntimeException("La contraseña es incorrecta");
+        }
+
+        String hash = passwordEncoder.encode(dto.getNewPassword());
+        usuario.setPasswordHash(hash);
+        usuarioRepository.save(usuario);
     }
 }

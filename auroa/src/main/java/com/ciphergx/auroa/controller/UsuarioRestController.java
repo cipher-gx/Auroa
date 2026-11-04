@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ciphergx.auroa.dto.ActualizarPasswordRequestDto;
+import com.ciphergx.auroa.dto.AuthResponseDto;
 import com.ciphergx.auroa.dto.RegistroRequestDto;
 import com.ciphergx.auroa.dto.UsuarioResponseDto;
 import com.ciphergx.auroa.model.Usuario;
@@ -35,5 +38,11 @@ public class UsuarioRestController {
         UsuarioResponseDto respuesta = usuarioService.registrarUsuario(dto);
         return ResponseEntity.ok(respuesta);
     }
+    
+    @PostMapping("/recuperacion")
+    public ResponseEntity<String> recuperarPassword(@AuthenticationPrincipal Usuario u ,@RequestBody ActualizarPasswordRequestDto dto){
+        usuarioService.actualizarPassword(u, dto);
+        return ResponseEntity.ok("Contraseña actualizada correctamente");
+    }    
     
 }

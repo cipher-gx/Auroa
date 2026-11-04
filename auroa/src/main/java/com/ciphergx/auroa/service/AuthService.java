@@ -3,6 +3,8 @@ package com.ciphergx.auroa.service;
 import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.ciphergx.auroa.dto.ActualizarPasswordRequestDto;
 import com.ciphergx.auroa.dto.AuthResponseDto;
 import com.ciphergx.auroa.dto.LoginRequestDto;
 import com.ciphergx.auroa.repository.UsuarioRepository;
