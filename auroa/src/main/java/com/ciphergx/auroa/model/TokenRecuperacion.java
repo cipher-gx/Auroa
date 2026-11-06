@@ -26,7 +26,7 @@ public class TokenRecuperacion {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column (nullable = false, unique = true)
+    @Column (nullable = false, unique = false)
     private String token;
 
     @Column (nullable = false)
@@ -38,4 +38,7 @@ public class TokenRecuperacion {
     @JoinColumn(name = "usuario_id", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY) 
     private Usuario usuario;
+
+    @Column(nullable = false)
+    private Integer intentosFallidos = 0;
 }

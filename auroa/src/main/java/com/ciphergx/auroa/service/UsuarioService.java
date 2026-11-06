@@ -1,15 +1,12 @@
 package com.ciphergx.auroa.service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ciphergx.auroa.dto.ActualizarPasswordRequestDto;
-import com.ciphergx.auroa.dto.AuthResponseDto;
 import com.ciphergx.auroa.dto.RegistroRequestDto;
-import com.ciphergx.auroa.dto.UsuarioRequestDto;
 import com.ciphergx.auroa.dto.UsuarioResponseDto;
 import com.ciphergx.auroa.model.Usuario;
 import com.ciphergx.auroa.repository.UsuarioRepository;
